@@ -1,0 +1,144 @@
+Exercicio 1:
+
+public class ArrayBidimensional {
+    public static void main (String[] args) {
+        // Declara e inicializa uma matriz bidimensional de 3 linhas por 3 colunas.
+        // O tipo de dado é int (números inteiros).
+        int[][] matriz = new int[5][5];
+
+        // Atribui valores a cada elemento da matriz, especificando a linha e a coluna.
+        // Por exemplo, matriz[0][0] acessa o elemento na primeira linha e primeira coluna.
+        matriz[0][0] = 120; matriz[1][0] = 232; matriz[2][0] = 201; matriz[3][0] = 301; matriz[4][0] = 401;
+        matriz[0][1] = 120; matriz[1][1] = 232; matriz[2][1] = 201; matriz[3][1] = 301; matriz[4][1] = 401;
+        matriz[0][2] = 120; matriz[1][2] = 232; matriz[2][2] = 201; matriz[3][2] = 301; matriz[4][2] = 401;
+        matriz[0][3] = 120; matriz[1][3] = 232; matriz[2][3] = 201; matriz[3][3] = 301; matriz[4][3] = 401;
+        matriz[0][4] = 120; matriz[1][4] = 232; matriz[2][4] = 201; matriz[3][4] = 301; matriz[4][4] = 401;
+
+        // Início do laço externo para percorrer as linhas da matriz.
+        // O laço vai de 0 até o número total de linhas (matriz.length).
+        for (int linha = 0; linha < matriz.length; linha++) {
+            // Início do laço interno para percorrer as colunas da linha atual.
+            // O laço vai de 0 até o número de colunas daquela linha (matriz[linha].length).
+            for (int coluna = 0; coluna < matriz[linha].length; coluna++) {
+                // Imprime a posição (linha e coluna) e o valor do elemento.
+                System.out.println("Elemento na posição [" + linha + "][" + coluna + "]: " + matriz[linha][coluna]);
+            }
+        }
+    }
+}
+
+Exercicio 2:
+
+public class AumentarArray {
+
+    public static void main(String[] args) {
+        // --- Exemplo de como "aumentar" um array de Strings ---
+
+        // 1. Array original com tamanho fixo (6 elementos)
+        String[] nomes = {"Lucas", "Daniel", "Julia", "Tatiana", "Izabela", "Matheus"};
+        System.out.println("Array original (tamanho " + nomes.length + "): " + java.util.Arrays.toString(nomes));
+
+        // 2. Definir o novo tamanho. Queremos adicionar 3 nomes.
+        int novoTamanho = nomes.length + 3;
+
+        // 3. Criar um NOVO array com o tamanho desejado.
+        // Ele terá 9 posições, com as 6 primeiras vazias (valor default 'null').
+        String[] novoNomes = new String[novoTamanho];
+
+        // 4. Copiar os elementos do array original para o novo array.
+        // Sintaxe: System.arraycopy(arrayOrigem, posInicialOrigem, arrayDestino, posInicialDestino, numElementos)
+        System.arraycopy(nomes, 0, novoNomes, 0, nomes.length);
+
+        // O array 'novoNomes' agora contém: {"Lucas", "Daniel", "Julia", "Tatiana", "Izabela", "Matheus", null, null, null}
+        
+        // 5. Adicionar os novos elementos nas posições restantes do novo array.
+        // A primeira posição livre é o índice 6.
+        novoNomes[6] = "Carlos";
+        novoNomes[7] = "Mariana";
+        novoNomes[8] = "Fernanda";
+
+        // 6. (Opcional) Fazer a referência 'nomes' apontar para o novo array.
+        // Isso é útil se você quiser continuar trabalhando com a variável 'nomes'.
+        nomes = novoNomes;
+
+        // 7. Exibir o resultado final.
+        System.out.println("Novo array (tamanho " + nomes.length + "): " + java.util.Arrays.toString(nomes));
+    }
+}
+
+exercicio 3:
+
+int[] pilha = new int[10];
+int topo = -1;
+
+// Empilhando 10 elementos
+for (int i = 0; i < 10; i++) {
+    pilha[++topo] = i + 1;
+}
+
+
+
+
+exercicio 5:
+
+import java.util.Stack;
+
+public class ExemploPilhaSimples2 {
+    public static void main(String[] args) {
+        Stack<Integer> pilha = new Stack<>();
+
+        for (int i = 1; i <= 10; i++) {
+            pilha.push(i);
+        }
+
+        // Mostrar elementos
+        while (!pilha.isEmpty()) {
+            System.out.println(pilha.pop());
+        }
+    }
+}
+
+Exercicio 6:
+
+import java.util.Stack;
+
+public class ExemploStack {
+    public static void main(String[] args) {
+        // Cria uma nova instância da classe Stack para armazenar Strings.
+        // Stack é uma estrutura de dados LIFO (Last-In, First-Out).
+        Stack<String> historicoDeNavegacao = new Stack<>();
+
+        // 1. Adiciona elementos na pilha usando o método push().
+        // O último elemento adicionado será o primeiro a ser removido.
+        historicoDeNavegacao.push("https://www.google.com/");
+        historicoDeNavegacao.push("https://www.msn.com/pt-br?ocid=msedgntp&pc=U531&cvid=68c9fdc1c94a4c4fbda39c83f17b7b7b&ei=9");
+        historicoDeNavegacao.push("uol.com.br");
+        historicoDeNavegacao.push("https://doodles.google/");
+        historicoDeNavegacao.push("https://www.youtube.com/");
+        // Este é o topo da pilha agora.
+
+        // 2. Acessa o elemento do topo da pilha sem removê-lo.
+        System.out.println("Página atual (topo): " + historicoDeNavegacao.peek());
+
+        // 3. Remove e retorna o elemento do topo da pilha.
+        System.out.println("Voltando para a página anterior: " + historicoDeNavegacao.pop());
+
+        // 4. Acessa o novo elemento do topo da pilha.
+        System.out.println("Página atual: " + historicoDeNavegacao.peek());
+    }
+}
+
+exercicios 7:
+
+import java.util.Arrays;
+
+public class OrdenaArray {
+    public static void main(String[] args) {
+        String[] nomes = {"Carlos", "Amanda", "Bruno", "Daniel"};
+        Arrays.sort(nomes);  // Ordena alfabeticamente
+
+        for (String nome : nomes) {
+            System.out.println(nome);
+        }
+    }
+}
