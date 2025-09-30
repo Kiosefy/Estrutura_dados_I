@@ -1,0 +1,327 @@
+EXERCECIO 1:
+
+import java.util.Scanner;
+    
+    // Definição de um enum chamado DiaDaSemana
+    // Ele contém constantes que representam os dias da semana
+    enum DiaDaSemana {
+        SEGUNDA,
+        TERCA,
+        QUARTA,
+        QUINTA,
+        SEXTA,
+        SABADO,
+        DOMINGO
+    }
+    public class Main{
+        public static void main(String[] args) {
+                // Criamos um Scanner para ler a entrada do usuário
+                Scanner scanner = new Scanner(System.in);
+        
+                // Pedimos para o usuário digitar o dia da semana
+                System.out.print("Digite o dia da semana (ex: SEGUNDA, TERCA...): ");
+                String entrada = scanner.next().toUpperCase(); 
+                // .toUpperCase() transforma em maiúsculo para evitar erro 
+                // caso o usuário digite em minúsculo
+        
+                try {
+                    // Convertemos a String digitada para o tipo enum DiaDaSemana
+                    DiaDaSemana dia = DiaDaSemana.valueOf(entrada);
+        
+                    // Mostra o dia escolhido
+                    System.out.println("Você escolheu: " + dia);
+        
+                    // Usamos switch para mostrar uma mensagem dependendo do dia
+                    switch (dia) {
+                        case SEGUNDA:
+                            System.out.println("Segunda, dia de prova de processos de Software");
+                            break;
+                        case TERCA:
+                            System.out.println("Terça, dia de prova de estrutura de dados I e EAD");
+                            break;
+                        case QUARTA:
+                            System.out.println("Quarta, dia de prova Adm e organização de banco de dados");
+                            break;
+                        case QUINTA:
+                            System.out.println("Quinta, dia de prova de estrutura de dados II");
+                            break;
+                        case SEXTA:
+                            System.out.println("Sextou!");
+                            break;
+                        case SABADO:
+                             System.out.println("Começou o final de semana! #PAZ");
+                            break;
+                        case DOMINGO:
+                            System.out.println("Cuidado com o domingo a noite");
+                            break;
+                        default:
+                            System.out.println("Dia comum.");
+                    }
+                } catch (IllegalArgumentException e) {
+                    // Caso o usuário digite algo que não exista no enum
+                    System.out.println("Dia inválido! Digite um nome correto em maiúsculo (ex: SEGUNDA).");
+                }
+        
+                // Fecha o Scanner para evitar vazamento de recursos
+                scanner.close();
+            }
+}
+EXERCECIO 2:
+
+import java.util.Scanner;
+
+// Definição do enum que representa os níveis de acesso
+enum NivelAcesso {
+    ADMIN,
+    USUARIO,
+    CONVIDADO,
+    DARTH_VADER
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Exibe as opções para o usuário
+        System.out.println("Escolha o nível de acesso:");
+        System.out.println("1 - ADMIN");
+        System.out.println("2 - USUARIO");
+        System.out.println("3 - CONVIDADO");
+        System.out.println("4 - DARTH VADER");
+        System.out.print("Digite o número correspondente: ");
+
+        int opcao = scanner.nextInt(); // Lê o número digitado pelo usuário
+
+        try {
+            // Variável para armazenar o nível escolhido
+            NivelAcesso nivel;
+
+            // Converte a escolha numérica para o enum correspondente
+            switch (opcao) {
+                case 1:
+                    nivel = NivelAcesso.ADMIN;
+                    break;
+                case 2:
+                    nivel = NivelAcesso.USUARIO;
+                    break;
+                case 3:
+                    nivel = NivelAcesso.CONVIDADO;
+                    break;
+                case 4:                     
+                    nivel = NivelAcesso.DARTH_VADER;
+                    break;
+                default:
+                    // Se o número não for 1, 2 ou 3, lança exceção
+                    throw new IllegalArgumentException();
+            }
+
+            // Mostra o nível escolhido
+            System.out.println("Nível de acesso escolhido: " + nivel);
+
+            // Usa switch novamente para exibir mensagens específicas
+            switch (nivel) {
+                case ADMIN:
+                    System.out.println("Acesso total ao sistema.");
+                    break;
+                case USUARIO:
+                    System.out.println("Acesso limitado: pode usar funções básicas.");
+                    break;
+                case CONVIDADO:
+                    System.out.println("Apenas visualização.");
+                    break;
+                case DARTH_VADER:
+                    System.out.println("Não, eu sou seu pai");
+                    break;
+            }
+        } catch (IllegalArgumentException e) {
+            // Caso o usuário digite um número inválido
+            System.out.println("Opção inválida! Digite 1, 2, 3 ou 4.");
+        }
+
+        // Fecha o Scanner
+        scanner.close();
+    }
+}
+
+EXERCECIO 3:
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Scanner;
+
+// Enum que define os status possíveis de uma tarefa
+enum StatusTarefa {
+    PENDENTE,       // Tarefa ainda não iniciada
+    EM_ANDAMENTO,   // Tarefa em andamento
+    CONCLUIDA       // Tarefa concluída
+}
+
+// Classe que representa uma Tarefa
+class Tarefa {
+    private String descricao;      // Descrição da tarefa
+    private StatusTarefa status;   // Status da tarefa (usando enum)
+
+    // Construtor da classe
+    public Tarefa(String descricao) {
+        this.descricao = descricao;
+        this.status = StatusTarefa.PENDENTE; // Inicialmente toda tarefa é PENDENTE
+    }
+
+    // Método para iniciar a tarefa
+    public void iniciar() {
+        this.status = StatusTarefa.EM_ANDAMENTO;
+    }
+
+    // Método para concluir a tarefa
+    public void concluir() {
+        this.status = StatusTarefa.CONCLUIDA;
+    }
+
+    // Getter para status
+    public StatusTarefa getStatus() {
+        return status;
+    }
+
+    // Getter para descrição
+    public String getDescricao() {
+        return descricao;
+    }
+
+    // Exibir informação da tarefa com cores no console
+    public void exibirInfo() {
+        String cor = ""; // Variável que armazenará o código da cor ANSI
+        switch (status) {
+            case PENDENTE -> cor = "\u001B[31m";      // Vermelho
+            case EM_ANDAMENTO -> cor = "\u001B[33m";  // Amarelo
+            case CONCLUIDA -> cor = "\u001B[32m";     // Verde
+        }
+        String reset = "\u001B[0m"; // Reseta a cor do texto
+        System.out.println(cor + "Tarefa: " + descricao + " | Status: " + status + reset);
+    }
+}
+
+// Classe principal do gerenciador
+public class GerenciadorDeTasks {
+    public static void main(String[] args) {
+        ArrayList<Tarefa> tarefas = new ArrayList<>(); // Lista para armazenar as tarefas
+        Scanner sc = new Scanner(System.in);           // Scanner para ler entrada do usuário
+        int opcao;                                     // Variável para armazenar a opção do menu
+
+        do {
+            // Exibe o menu principal
+            System.out.println("\n===== GERENCIADOR DE TAREFAS =====");
+            System.out.println("1 - Cadastrar tarefa");
+            System.out.println("2 - Iniciar tarefa");
+            System.out.println("3 - Concluir tarefa");
+            System.out.println("4 - Listar tarefas (pendentes primeiro)");
+            System.out.println("0 - Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = sc.nextInt();
+            sc.nextLine(); // Consumir a quebra de linha deixada pelo nextInt
+
+            switch(opcao) {
+                case 1 -> {
+                    // Cadastrar nova tarefa
+                    System.out.print("Digite a descrição da tarefa: ");
+                    String desc = sc.nextLine();
+                    tarefas.add(new Tarefa(desc)); // Adiciona na lista
+                    System.out.println("Tarefa cadastrada!");
+                }
+
+                case 2 -> {
+                    // Iniciar uma tarefa existente
+                    System.out.print("Digite o número da tarefa para iniciar: ");
+                    int numIniciar = sc.nextInt() - 1; // Ajusta índice (usuário digita 1..N)
+                    if (numIniciar >= 0 && numIniciar < tarefas.size()) {
+                        tarefas.get(numIniciar).iniciar();
+                        System.out.println("Tarefa iniciada!");
+                    } else {
+                        System.out.println("Número inválido!");
+                    }
+                }
+
+                case 3 -> {
+                    // Concluir uma tarefa existente
+                    System.out.print("Digite o número da tarefa para concluir: ");
+                    int numConcluir = sc.nextInt() - 1;
+                    if (numConcluir >= 0 && numConcluir < tarefas.size()) {
+                        tarefas.get(numConcluir).concluir();
+                        System.out.println("Tarefa concluída!");
+                    } else {
+                        System.out.println("Número inválido!");
+                    }
+                }
+
+                case 4 -> {
+                    // Listar todas as tarefas ordenadas por status
+                    System.out.println("\n---- LISTA DE TAREFAS (ORDENADAS POR STATUS) ----");
+                    // Ordena tarefas: PENDENTE → EM_ANDAMENTO → CONCLUIDA
+                    tarefas.sort(Comparator.comparingInt(t -> t.getStatus().ordinal()));
+                    for (int i = 0; i < tarefas.size(); i++) {
+                        System.out.print((i + 1) + " - "); // Mostra número da tarefa
+                        tarefas.get(i).exibirInfo();      // Exibe info colorida
+                    }
+                }
+
+                case 0 -> System.out.println("Saindo do gerenciador...");
+
+                default -> System.out.println("Opção inválida!"); // Opção não reconhecida
+            }
+
+        } while(opcao != 0); // Repete o menu até o usuário escolher sair
+
+        sc.close(); // Fecha o Scanner
+    }
+}
+
+EXERCECIO 4:
+
+import java.util.Vector;
+
+public class ExemploVector {
+    public static void main(String[] args) {
+        // Criando um Vector de Strings
+        // Vector é como um ArrayList, mas é sincronizado (thread-safe)
+        Vector<String> nomes = new Vector<>();
+
+        // Adicionando elementos ao Vector
+        nomes.add("Alice");   // Adiciona "Alice" no final
+        nomes.add("Bob");     // Adiciona "Bob" no final
+        nomes.add("Carlos");  // Adiciona "Carlos" no final
+        nomes.add("AÉÉÉ");
+        nomes.add("Vetooor");
+
+        // Exibindo todos os elementos do Vector
+        System.out.println("Elementos do Vector: " + nomes);
+
+        // Acessando um elemento específico pelo índice
+        System.out.println("Primeiro elemento: " + nomes.get(0)); // índice 0 = Alice
+
+        // Removendo um elemento pelo valor
+        nomes.remove("Bob"); // Remove "Bob" do Vector
+        System.out.println("Após remover Bob: " + nomes);
+
+        // Verificando o tamanho atual do Vector
+        System.out.println("Tamanho do Vector: " + nomes.size());
+
+        // Verificando se um elemento existe no Vector
+        if (nomes.contains("Carlos")) {
+            System.out.println("Carlos está no Vector!");
+        }
+
+        // Percorrendo o Vector usando for-each
+        System.out.println("\nPercorrendo o Vector:");
+        for (String nome : nomes) {
+            System.out.println(nome); // Imprime cada elemento
+        }
+
+        // Outras operações úteis:
+        // nomes.add(1, "Daniel"); // Insere "Daniel" na posição 1, deslocando os outros
+        // nomes.remove(0);         // Remove o elemento da posição 0
+        // nomes.clear();           // Remove todos os elementos
+    }
+}
+
+Exercicio 5:
+
+A principal distinção é que Vector é uma implementação de lista dinâmica, enquanto Stack é uma implementação de pilha.
