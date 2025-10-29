@@ -1,0 +1,10 @@
+1- c) Os elementos seguem a política FIFO (primeiro a entrar, primeiro a sair).
+2- b) --- Adicionando Clientes ---
+3- b) poll()
+4- b) Não, ele apenas visualiza o primeiro elemento sem removê-lo.
+5- c) add() pode lançar exceção se a fila estiver cheia, enquanto offer() retorna false.
+6- a) Queue<String> filaDeClientes = new ArrayDeque<>();
+7- b) O programa lança uma exceção NullPointerException.
+8- c) Remover e imprimir todos os clientes até a fila esvaziar.
+9- c) [] (fila vazia)
+10- c) Retorna true apenas quando todos os elementos foram removidos.
